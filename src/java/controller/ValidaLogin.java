@@ -7,23 +7,27 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 @WebServlet(name = "ValidaLogin", urlPatterns = {"/verifica_usuario.java"})
 public class ValidaLogin extends HttpServlet {
+    private String user;
+    private String pass;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
+        this.user = request.getParameter("user");
+        this.pass = request.getParameter("pass");
         
-        String userDb = "email@email";
-        String passDb = "senha1234";
+        User objUser = new User(this.user, this.pass);
         
-        if(userDb.equals(user)
-            && passDb.equals(pass)) {
-            request.setAttribute("userName", user);
+        if(objUser.isLogged()) {
+            HttpSession session = request.getSession();
+            session.setAttribute("userNameSession", objUser);
+            request.setAttribute("userName", objUser);
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else {
             PrintWriter out = response.getWriter();
