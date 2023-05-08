@@ -34,12 +34,11 @@ public class ValidaLogin extends HttpServlet {
             out.print(
                     "<script>"
                   + "alert('Acesso negado!');"
-                  + "window.location.replace('index.html');"
+                  + "window.location.replace('index.jsp');"
                   + "</script>"
             );
         }
-        
-        
+              
         
         
         try (PrintWriter out = response.getWriter()) {
