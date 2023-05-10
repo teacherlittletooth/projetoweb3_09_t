@@ -15,7 +15,7 @@
         <h1>Cadastro</h1>
         <hr>
                 
-        <form action="#" method="post">
+        <form action="TitularController" method="post">
             <h3>Novo usuário</h3>
             <input type="text" name="user" placeholder="Nome do usuário" required>
             
