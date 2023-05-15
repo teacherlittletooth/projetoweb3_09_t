@@ -4,6 +4,8 @@
     Author     : QI
 --%>
 
+<%@page import="model.Titular" %>
+<%@page import="model.TitularDAO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +15,39 @@
     </head>
     <body>
         <h1>Lista</h1>
-        
+        <hr>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>NASCIMENTO</th>
+                    <th>CPF</th>
+                    <th>CEP</th>
+                    <th>TIPO</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    TitularDAO tdao = new TitularDAO();
+                    for(Titular t : tdao.listTitular()) {
+                %>
+                <tr>
+                    <td><%= t.getIdTitular() %></td>
+                    <td><%= t.getNome() %></td>
+                    <td><%= t.getNascimento() %></td>
+                    <td><%= t.getCpf() %></td>
+                    <td><%= t.getCep() %></td>
+                    <td><%= t.getTipo() %></td>
+                    <td>✏</td>
+                    <td>🗑</td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+
         <hr>
         <a href="home.jsp">Voltar para página inicial</a>
     </body>

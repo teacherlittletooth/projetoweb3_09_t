@@ -13,9 +13,7 @@ import model.TitularDAO;
 
 
 @WebServlet(name = "TitularController", urlPatterns = {"/TitularController"})
-public class TitularController extends HttpServlet {
-
-      
+public class TitularController extends HttpServlet {      
     private String nome;
     private String nascimento;
     private String cpf;
@@ -39,8 +37,8 @@ public class TitularController extends HttpServlet {
             TitularDAO tdao = new TitularDAO();
             tdao.insertTitular(t);
             response.sendRedirect("home.jsp");
-        } catch(SQLException | ClassNotFoundException erro){
             
+        } catch(SQLException | ClassNotFoundException erro){ 
         
         
         try (PrintWriter out = response.getWriter()) {

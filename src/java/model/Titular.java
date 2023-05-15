@@ -15,6 +15,8 @@ public class Titular {
         this.cep = cep;
         this.tipo = tipo;
     }
+    
+    public Titular(){}
 
     public int getIdTitular() {
         return idTitular;
