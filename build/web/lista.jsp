@@ -42,7 +42,10 @@
                     <td><%= t.getCep() %></td>
                     <td><%= t.getTipo() %></td>
                     <td>✏</td>
-                    <td>🗑</td>
+                    
+                    <td>
+                        <a onclick="confirmaDelete(<%= t.getIdTitular() %>);">🗑</a>
+                    </td>
                 </tr>
                 <% } %>
             </tbody>
@@ -50,5 +53,15 @@
 
         <hr>
         <a href="home.jsp">Voltar para página inicial</a>
+        
+        <script>
+            function confirmaDelete(cod) {
+                if(confirm("Deseja mesmo excluir?")){
+                    window.location.replace("TitularDelete?id=" + cod);
+                } else {
+                    alert("Exclusão cancelada.");
+                }
+            }
+        </script>
     </body>
 </html>

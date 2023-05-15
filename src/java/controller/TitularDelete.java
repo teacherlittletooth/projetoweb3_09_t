@@ -8,48 +8,33 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import model.Titular;
 import model.TitularDAO;
 
+@WebServlet(name = "TitularDelete", urlPatterns = {"/TitularDelete"})
+public class TitularDelete extends HttpServlet {
 
-@WebServlet(name = "TitularController", urlPatterns = {"/TitularController"})
-public class TitularController extends HttpServlet {      
-    private String nome;
-    private String nascimento;
-    private String cpf;
-    private String cep;
-    private String tipo;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        this.nome =request.getParameter("user");
-        this.nascimento =request.getParameter("nasc");
-        this.cpf =request.getParameter("cpf");
-        this.cep =request.getParameter("cep");
-        this.tipo =request.getParameter("tipo");
+        int id = Integer.parseInt(request.getParameter("id"));
         
-        Titular t = new Titular(this.nome,this.nascimento,this.cpf,this.cep,this.tipo);
-        
-        try{
-            
+        try {
             TitularDAO tdao = new TitularDAO();
-            tdao.insertTitular(t);
+            tdao.deleteTitular(id);
             response.sendRedirect("lista.jsp");
             
-        } catch(SQLException | ClassNotFoundException erro){ 
-        
+        } catch(SQLException | ClassNotFoundException erro) {
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TitularController</title>");            
+            out.println("<title>Servlet TitularDelete</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>erro: " + erro + "</h1>");
+            out.println("<h1>Ocorreu algum erro: " + erro + "</h1>");
             out.println("</body>");
             out.println("</html>");
             }

@@ -67,5 +67,16 @@ public class TitularDAO {
         //Retornando a lista completa
         return list;
     }
+    
+    
+    //DELETE
+    public void deleteTitular(int id) throws SQLException{
+        String query = "DELETE FROM titulares WHERE id_titular = " + id;
+        
+        PreparedStatement prep = con.prepareStatement(query);
+        
+        prep.execute();
+        prep.close();
+    }
 }
 
