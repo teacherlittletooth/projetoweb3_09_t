@@ -8,6 +8,15 @@ public class Titular {
     private String cep;
     private String tipo;
 
+    public Titular(int id, String nome, String nascimento, String cpf, String cep, String tipo) {
+        this.idTitular = id;
+        this.nome = nome;
+        this.nascimento = nascimento;
+        this.cpf = cpf;
+        this.cep = cep;
+        this.tipo = tipo;
+    }
+    
     public Titular(String nome, String nascimento, String cpf, String cep, String tipo) {
         this.nome = nome;
         this.nascimento = nascimento;

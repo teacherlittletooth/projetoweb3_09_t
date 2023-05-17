@@ -11,73 +11,33 @@ import java.sql.SQLException;
 import model.Titular;
 import model.TitularDAO;
 
+@WebServlet(name = "TitularUpdate", urlPatterns = {"/TitularUpdate"})
+public class TitularUpdate extends HttpServlet {
 
-@WebServlet(name = "TitularController", urlPatterns = {"/TitularController"})
-public class TitularController extends HttpServlet {      
-    private int id;
-    private String nome;
-    private String nascimento;
-    private String cpf;
-    private String cep;
-    private String tipo;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        if(request.getParameter("id") != null){
-            this.id = Integer.parseInt(request.getParameter("id"));
-        }
-                        
-        this.nome = request.getParameter("user");
-        this.nascimento = request.getParameter("nasc");
-        this.cpf = request.getParameter("cpf");
-        this.cep = request.getParameter("cep");
-        this.tipo = request.getParameter("tipo");
-                        
-        try{
-            
-            TitularDAO tdao = new TitularDAO();
-            
-            if(request.getParameter("id") != null) {
-                
-                Titular t = new Titular(
-                    this.id,
-                    this.nome,
-                    this.nascimento,
-                    this.cpf,
-                    this.cep,
-                    this.tipo
-                );
-                tdao.updateTitular(t);
-                
-            } else {
-                
-                Titular t = new Titular(
-                    this.nome,
-                    this.nascimento,
-                    this.cpf,
-                    this.cep,
-                    this.tipo
-                );
-                tdao.insertTitular(t);
-                
-            }
-            
-            response.sendRedirect("lista.jsp");
-            
-        } catch(SQLException | ClassNotFoundException erro){ 
+        int id = Integer.parseInt(request.getParameter("id"));
         
+        try {
+            TitularDAO tdao = new TitularDAO();
+            Titular t = tdao.listById(id);
+            request.setAttribute("titular", t);
+            request.getRequestDispatcher("edit-titular.jsp")
+                    .forward(request, response);
+            
+        } catch(SQLException | ClassNotFoundException erro) {
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TitularController</title>");            
+            out.println("<title>Servlet TitularDelete</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>erro: " + erro + "</h1>");
+            out.println("<h1>Ocorreu algum erro: " + erro + "</h1>");
             out.println("</body>");
             out.println("</html>");
             }

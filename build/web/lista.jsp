@@ -41,7 +41,9 @@
                     <td><%= t.getCpf() %></td>
                     <td><%= t.getCep() %></td>
                     <td><%= t.getTipo() %></td>
-                    <td>✏</td>
+                    <td>
+                        <a href="TitularUpdate?id=<%= t.getIdTitular() %>">✏</a>
+                    </td>
                     
                     <td>
                         <a onclick="confirmaDelete(<%= t.getIdTitular() %>);">🗑</a>
