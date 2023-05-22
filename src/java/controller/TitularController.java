@@ -20,20 +20,24 @@ public class TitularController extends HttpServlet {
     private String cpf;
     private String cep;
     private String tipo;
+    private String senha;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        //Verificando a existência do ID
         if(request.getParameter("id") != null){
             this.id = Integer.parseInt(request.getParameter("id"));
         }
-                        
+        
+        //Recebendo os dados do formulário
         this.nome = request.getParameter("user");
         this.nascimento = request.getParameter("nasc");
         this.cpf = request.getParameter("cpf");
         this.cep = request.getParameter("cep");
         this.tipo = request.getParameter("tipo");
+        this.senha = request.getParameter("senha");
                         
         try{
             
@@ -58,7 +62,8 @@ public class TitularController extends HttpServlet {
                     this.nascimento,
                     this.cpf,
                     this.cep,
-                    this.tipo
+                    this.tipo,
+                    this.senha
                 );
                 tdao.insertTitular(t);
                 

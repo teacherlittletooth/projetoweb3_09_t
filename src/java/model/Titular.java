@@ -7,6 +7,7 @@ public class Titular {
     private String cpf;
     private String cep;
     private String tipo;
+    private String senha;
 
     public Titular(int id, String nome, String nascimento, String cpf, String cep, String tipo) {
         this.idTitular = id;
@@ -17,16 +18,22 @@ public class Titular {
         this.tipo = tipo;
     }
     
-    public Titular(String nome, String nascimento, String cpf, String cep, String tipo) {
+    public Titular(String nome, String nascimento, String cpf, String cep, String tipo, String senha) {
         this.nome = nome;
         this.nascimento = nascimento;
         this.cpf = cpf;
         this.cep = cep;
         this.tipo = tipo;
+        this.senha = senha;
     }
     
     public Titular(){}
 
+    //Getter e Setter
+    public String getSenha() {
+        return senha;
+    }
+    
     public int getIdTitular() {
         return idTitular;
     }

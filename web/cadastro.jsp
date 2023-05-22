@@ -37,11 +37,26 @@
             </select>
             
             <br><br>
+            <input type="password" name="senha" onmouseover="show();" onmouseout="hide();" placeholder="Informe uma senha" id="senha" required>
+            
+            <br><br>
             <input type="submit" value="Cadastrar">
             <input type="reset" value="Limpar">
         </form>
         
         <hr>
         <a href="home.jsp">Voltar para página inicial</a>
+        
+        <script>
+            var senha = document.getElementById("senha");
+            
+            function show() {
+                senha.type = "text";
+            }
+            
+            function hide() {
+                senha.type = "password";
+            }
+        </script>
     </body>
 </html>

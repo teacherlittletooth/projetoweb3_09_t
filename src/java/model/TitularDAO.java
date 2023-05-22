@@ -17,8 +17,8 @@ public class TitularDAO {
     //Métodos do CRUD
     //INSERT (Create)
     public void insertTitular(Titular titular) throws SQLException{
-        String sql = "INSERT INTO titulares(nome,nascimento,cpf,cep,tipo)"
-                + "VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO titulares(nome,nascimento,cpf,cep,tipo,senha)"
+                + "VALUES(?,?,?,?,?,?)";
         
         PreparedStatement prep = con.prepareStatement(sql);
         
@@ -27,6 +27,7 @@ public class TitularDAO {
         prep.setString(3, titular.getCpf());
         prep.setString(4, titular.getCep());
         prep.setString(5, titular.getTipo());
+        prep.setString(6, titular.getSenha());
         
         prep.execute();
         prep.close();
