@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.SQLException;
+
 public class Titular {
     private int idTitular;
     private String nome;
@@ -32,6 +34,10 @@ public class Titular {
     //Getter e Setter
     public String getSenha() {
         return senha;
+    }
+    
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
     public int getIdTitular() {
@@ -83,4 +89,18 @@ public class Titular {
     }
     
     
+    public boolean isLogged() throws ClassNotFoundException, SQLException {
+        TitularDAO tdao = new TitularDAO();
+        Titular tBanco = tdao.listByName(this.nome);
+        
+        if(tBanco.getNome() != null){
+            //Nesse bloco, o usuário foi encontrado, então a senha
+            //será testada
+            return (tBanco.getSenha().equals(this.senha));
+        } else {
+            //Neste bloco, o nome de usuário não foi encontrado
+            return false;
+        }
+    }
+        
 }

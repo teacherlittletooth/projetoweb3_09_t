@@ -135,4 +135,36 @@ public class TitularDAO {
         return tt;
     }
     
-}
+    
+    public Titular listByName(String nome) throws SQLException {
+        //Criar um objeto vazio
+        Titular tt = new Titular();
+        
+        //Criar query genérica
+        String query = "SELECT * FROM titulares "
+                + "WHERE nome = ?";
+        
+        //Preparar a query para o BD
+        PreparedStatement prep = con.prepareStatement(query);
+        prep.setString(1, nome);
+        
+        //Capturar o resultado da query
+        ResultSet res = prep.executeQuery();
+        
+        //Inserir valores das colunas do resultado nos
+        //atributos do objeto que desejamos retornar
+        if(res.next()) {
+            tt.setIdTitular(res.getInt("id_titular"));
+            tt.setNome(res.getString("nome"));
+            tt.setCpf(res.getString("cpf"));
+            tt.setCep(res.getString("cep"));
+            tt.setNascimento(res.getString("nascimento"));
+            tt.setTipo(res.getString("tipo"));
+            tt.setSenha(res.getString("senha"));
+        }
+        
+        //Retornando o objeto preenchido
+        return tt;
+    }
+    
+}//Fim da classe

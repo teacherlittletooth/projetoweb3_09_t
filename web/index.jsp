@@ -26,7 +26,7 @@
             <img src="img/clube.png" alt="Logotipo do clube" width="250" />
             <br>
             
-            <input type="email" name="user" id="user" class="field-login" placeholder="Insira seu email" required>
+            <input type="text" name="user" id="user" class="field-login" placeholder="Insira seu email" required>
             <br><br>
             
             <input type="password" name="pass" id="pass" class="field-login" placeholder="Insira sua senha" required>

@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import model.Titular;
 import model.User;
 
 @WebServlet(name = "ValidaLogin", urlPatterns = {"/verifica_usuario.java"})
@@ -22,12 +24,15 @@ public class ValidaLogin extends HttpServlet {
         this.user = request.getParameter("user");
         this.pass = request.getParameter("pass");
         
-        User objUser = new User(this.user, this.pass);
+        Titular obj = new Titular();
+        obj.setNome(this.user);
+        obj.setSenha(this.pass);
         
-        if(objUser.isLogged()) {
+        try {
+        if(obj.isLogged()) {
             HttpSession session = request.getSession();
-            session.setAttribute("userNameSession", objUser);
-            request.setAttribute("userName", objUser);
+            session.setAttribute("userNameSession", obj);
+            request.setAttribute("userName", obj);
             request.getRequestDispatcher("home.jsp").forward(request, response);
         } else {
             PrintWriter out = response.getWriter();
@@ -38,21 +43,9 @@ public class ValidaLogin extends HttpServlet {
                   + "</script>"
             );
         }
-              
-        
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ValidaLogin</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ValidaLogin at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    } catch(SQLException | ClassNotFoundException erro) {
+        //Código para tratamento do erro
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

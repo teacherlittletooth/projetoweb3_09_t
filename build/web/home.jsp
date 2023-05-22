@@ -4,9 +4,9 @@
     Author     : QI
 --%>
 
-<%@page import="model.User" %>
+<%@page import="model.Titular" %>
 <%
-    User uSession = (User)session.getAttribute("userNameSession");
+    Titular uSession = (Titular)session.getAttribute("userNameSession");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +20,7 @@
         <%@include file="session/verify.jsp" %>
         <p>
             Bem vindo <%= (uSession != null)
-                          ? uSession.getUserName() : "Visitante" %>!
+                          ? uSession.getNome() : "Visitante" %>!
             <button onclick="window.location.href='session/logout.jsp'">Logout</button>
         </p>
         
